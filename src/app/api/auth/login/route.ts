@@ -3,6 +3,7 @@ import { connectToDB } from "@/lib/database";
 import { LoginBody } from "@/types/user.types";
 import { ApiResponse } from "@/types/api.types";
 import userModel from "@/models/user.model";
+import { generateToken } from "@/lib/jwt";
 
 async function POST(req: NextRequest) {
     try {
@@ -26,9 +27,20 @@ async function POST(req: NextRequest) {
             success: false, message: "Invalid Credentials"
         }, { status: 401 })
 
-        return NextResponse.json<ApiResponse>({
-            success: true, message: "Login Successful"
+        const response = NextResponse.json<ApiResponse>({
+            success: true, message: "User Logged In Successfully",
+            user: {
+                _id: isUserExists._id.toString(),
+                name: isUserExists.name,
+                email: isUserExists.email,
+            }
         }, { status: 200 })
+
+        const token = generateToken({ userId: isUserExists._id.toString() })
+
+        response.cookies.set('token', token)
+
+        return response
 
     } catch (error) {
 
