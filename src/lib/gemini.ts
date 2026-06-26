@@ -12,7 +12,7 @@ export async function generateAIContent(prompt: string) {
 
         });
 
-        console.log(response.text);
+        return response.text;
 
     } catch (error) {
         console.error("Error generating text:", error);
