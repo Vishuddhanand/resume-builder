@@ -5,7 +5,7 @@ import { ApiResponse } from "@/types/api.types";
 import userModel from "@/models/user.model";
 import { generateToken } from "@/lib/jwt";
 
-async function POST(req: NextRequest) {
+export async function POST(req: NextRequest) {
     try {
         await connectToDB()
         const body: LoginBody = await req.json()

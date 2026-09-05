@@ -83,6 +83,6 @@ const resumeSchema = new mongoose.Schema<IResume>({
     timestamps: true
 })
 
-const resumeModel = mongoose.model('Resume', resumeSchema)
+const resumeModel = mongoose.models.Resume || mongoose.model<IResume>('Resume', resumeSchema)
 
 export default resumeModel

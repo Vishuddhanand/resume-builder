@@ -47,6 +47,6 @@ userSchema.methods.comparePassword = function (candidatePassword: string): boole
 }
 
 
-const userModel = mongoose.model('User', userSchema)
+const userModel = mongoose.models.User || mongoose.model<UserDocument>('User', userSchema)
 
 export default userModel
