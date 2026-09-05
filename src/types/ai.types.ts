@@ -20,3 +20,7 @@ export interface GenerateExperienceDescriptionBody {
     jobTitle: string;
     technologiesUsed: string[];
 }
+
+export interface ImproveContentBody {
+    content: string;
+}
